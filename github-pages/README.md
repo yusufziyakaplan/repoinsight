@@ -10,6 +10,7 @@ Bu klasör, PHP sürümündeki arayüzü veritabanı gerektirmeyen statik site o
 GitHub Actions, veriyi düzenli aralıklarla yeniler ve depoya kaydeder. Ziyaretçilerin tarayıcısı GitHub API'ye istek atmaz; API tokenı istemciye gönderilmez. İş akışı GitHub Actions sekmesinden elle de çalıştırılabilir.
 
 Favoriler, açılmış depolar, tema ve dil seçimi tarayıcıda saklanır; arama ve filtreler URL içinde tutulur. 7 günlük yıldız artışı geçmişi ilk bir haftadan sonra görünür.
+“Yükselen” sekmesi, son ölçülen 7 günlük dönemde yıldızı artan depoları gösterir; yeterli geçmişi olmayan depolar bu sekmede gösterilmez.
 
 Diller arasında geçiş yapmak için üstteki EN / TR düğmesini kullan.
 

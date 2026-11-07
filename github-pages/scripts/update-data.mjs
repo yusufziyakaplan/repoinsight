@@ -63,16 +63,15 @@ for (const rising of [false, true]) {
         : (b.repo.stargazers_count ?? 0) - (a.repo.stargazers_count ?? 0)).slice(0, 100);
 
     for (const { repo, topics } of ranked) {
-        const entry = found.get(repo.full_name) ?? { repo, topics: new Set(), top: false, rise: false };
+        const entry = found.get(repo.full_name) ?? { repo, topics: new Set(), top: false };
         entry.repo = repo;
         entry.top ||= !rising;
-        entry.rise ||= rising;
         topics.forEach((topic) => entry.topics.add(topic));
         found.set(repo.full_name, entry);
     }
 }
 
-const repos = [...found.values()].map(({ repo, topics, top, rise }) => ({
+const repos = [...found.values()].map(({ repo, topics, top }) => ({
     n: repo.full_name,
     d: repo.description,
     u: repo.html_url,
@@ -83,7 +82,7 @@ const repos = [...found.values()].map(({ repo, topics, top, rise }) => ({
     f: repo.forks_count ?? 0,
     i: repo.open_issues_count ?? 0,
     top,
-    rise,
+    rise: false,
     push: repo.pushed_at,
     born: repo.created_at,
     tr: null,
@@ -112,6 +111,7 @@ for (const repo of repos) {
         repo.tr = repo.s - history[previousDay][repo.n];
         repo.trd = Math.max(1, Math.round((Date.parse(`${today}T00:00:00Z`) - Date.parse(`${previousDay}T00:00:00Z`)) / 86_400_000));
     }
+    repo.rise = repo.tr !== null && repo.tr > 0;
 }
 
 const data = {
